@@ -15,4 +15,5 @@ before_install:
   - docker build -t rmarchei/jenkins .
 
 script:
-  - true
+  - docker run --rm rmarchei/jenkins java -version
+  - docker run --rm rmarchei/jenkins mvn -version
