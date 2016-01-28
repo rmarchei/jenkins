@@ -6,9 +6,13 @@ FROM centos:latest
 MAINTAINER Ruggero Marchei <ruggero.marchei@daemonzone.net>
 
 
+ENV JDK7_VERSION 7u79-b15
 ENV JDK8_VERSION 8u71-b15
 
 RUN cd /tmp && \
+  curl -sLO -b "oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/${JDK7_VERSION}/jdk-${JDK7_VERSION%%-*}-linux-x64.rpm && \
+  yum install -y /tmp/jdk-${JDK7_VERSION%%-*}-linux-x64.rpm && \
+  rm -f /tmp/jdk-${JDK7_VERSION%%-*}-linux-x64.rpm && \
   curl -sLO -b "oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/${JDK8_VERSION}/jdk-${JDK8_VERSION%%-*}-linux-x64.rpm && \
   yum install -y /tmp/jdk-${JDK8_VERSION%%-*}-linux-x64.rpm && \
   rm -f /tmp/jdk-${JDK8_VERSION%%-*}-linux-x64.rpm && \
