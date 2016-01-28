@@ -41,13 +41,13 @@ RUN sed -i "s/#UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/ss
   rm -f /etc/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_rsa_key && \
   ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_ecdsa_key && \
   ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key && \
-  echo "root:$ROOT_PW" | chpasswd; \
-  echo "jenkins:$JENKINS_PW" | chpasswd; \
-  gpasswd -a jenkins wheel; \
-  sed -i -e 's/^\(%wheel\s\+.\+\)/#\1/gi' /etc/sudoers; \
-  echo -e '\n%wheel ALL=(ALL) ALL' >> /etc/sudoers; \
-  echo -e '\nDefaults:root   !requiretty' >> /etc/sudoers; \
-  echo -e '\nDefaults:%wheel !requiretty' >> /etc/sudoers;
+  echo "root:$ROOT_PW" | chpasswd && \
+  echo "jenkins:$JENKINS_PW" | chpasswd && \
+  gpasswd -a jenkins wheel && \
+  sed -i 's/^\(%wheel\s\+.\+\)/#\1/gi' /etc/sudoers && \
+  echo -e '\n%wheel ALL=(ALL) ALL' >> /etc/sudoers && \
+  echo -e '\nDefaults:root   !requiretty' >> /etc/sudoers && \
+  echo -e '\nDefaults:%wheel !requiretty' >> /etc/sudoers
 
 
 ENV MAVEN_VERSION 3.2.5
