@@ -12,11 +12,13 @@ RUN cd /tmp && \
   curl -sLO -b "oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/${JDK8_VERSION}/jdk-${JDK8_VERSION%%-*}-linux-x64.rpm && \
   yum install -y /tmp/jdk-${JDK8_VERSION%%-*}-linux-x64.rpm && \
   rm -f /tmp/jdk-${JDK8_VERSION%%-*}-linux-x64.rpm && \
+  curl -sLo /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo && \
+  rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key && \
   yum install -y epel-release && \
   yum install -y unzip \
   gcc openssl-devel python-devel python-setuptools libffi-devel \
   cyrus-sasl-md5 ncftp \
-  java-1.8.0-openjdk-headless ant ant-jsch \
+  java-1.8.0-openjdk-headless ant ant-jsch jenkins \
   pyOpenSSL python2-crypto python-pip python-virtualenv \
   perl-DBD-mysql perl-JSON perl-XML-Twig \
   supervisor openssh openssh-server openssh-clients mariadb-libs mariadb \
